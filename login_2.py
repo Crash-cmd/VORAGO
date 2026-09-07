@@ -18,7 +18,7 @@ if credit["entry"]==1:
             login.destroy()
         elif usr != username.get():
             error_label.configure(text="Username dont match")
-        elif usr != username.get():
+        elif pas1 != password.get():
             error_label.configure(text="Password dont match")
         else:
             error_label.configure(text="UNKNOWN ERRORs")
