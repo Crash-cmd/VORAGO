@@ -3,7 +3,7 @@ from customtkinter import *
 from PIL import Image, ImageTk  # Ensure ImageTk is imported
 import json,time
 import practice_questions as pq
-from math_questions import question_loader
+from math_questions import mtasks, question_loader
 #import login1 ,login_2
 
 with open('credits.json','r') as f:
@@ -160,120 +160,11 @@ def paragrah(parent,content,row):
 page_no = 1
 
 
-def mtasks(mtask):
-    page_no = 1
-    def back(button_pressed):
-        global page_no
-        page_no-=1
-        if page_no == 0:
-            button_pressed.master.grid_forget()
-            m1_pra.grid_forget()
-            math_frame.grid(sticky="nswe",pady=5,row=0,column=0)
-            page_no = 1
-        elif page_no == 1 :
-            math_frame.grid_forget()
-            m1_intro.lift()
-        elif page_no == 2 :
-            math_frame.grid_forget()
-            m1_pra.lift()
-
-    def front(button_pressed):
-        global page_no
-        page_no+=1
-        if page_no == 2 :
-            math_frame.grid_forget()
-            m1_pra.lift()
-    math_frame.grid_forget()
-    if mtask == 1:
-            
-            # math_sc_1 = CTkFrame(maths)
-            # math_sc_1.grid(row=0,column=0,sticky="nswe") 
-            # math_sc_1.grid_columnconfigure(0, weight=0)  # Back button column (fixed width)
-            # math_sc_1.grid_columnconfigure(1, weight=1)  # Content column (EXPANDS to fill screen)
-            # math_sc_1.grid_columnconfigure(2, weight=0)  # Front button column (fixed width)
-
-            # back_b = CTkButton(math_sc_1, text="«", width=60, font=("Nasalization", 40), command=lambda: back(back_b))
-            # back_b.grid(column=0, row=0, sticky="w", padx=3)
-
-            # front_b = CTkButton(math_sc_1, text="»", font=("Nasalization", 40), width=60, command=lambda: front(front_b))
-            # front_b.grid(column=2, row=0, sticky="e", padx=3)
-
-            # m1_pra = CTkFrame(math_sc_1)
-            # m1_pra.columnconfigure(0,weight=1)
-            # m1_pra.rowconfigure(1,weight=1)
-            # heading(m1_pra,"Practice Questions",0,0)
-        
-            # pra_q = CTkFrame(m1_pra)
-            # pra_q.columnconfigure(0,weight=1)
-        
-            # question_loader(pra_q,pq.msc1_questions,0)
-            # pra_q.grid(row=1,column=0,sticky="nsew",pady=5,padx=3.5)
-            # m1_pra.grid(column=1, row=0, sticky="nswe")
-            
-            # #INTRODUCTION
-            
-            # m1_intro = CTkFrame(math_sc_1)
-            # m1_intro.columnconfigure(0,weight=1)
-            # heading(m1_intro, "Multiplying by 5", 0, 0)
-            # heading(m1_intro, "Core Principle", 1, 1)
-            # paragrah(m1_intro, "Multiplying by 5 is equivalent to multiplying by 10 and halving (since 5 = 10/2).", 2)
-            # heading(m1_intro, "The Rule", 1, 3)
-            # paragrah(m1_intro, "1. Multiply the number by 10 (shift the decimal one place right / append a zero).\n2. Divide the result by 2.", 4)
-            # heading(m1_intro, "Examples", 1, 5)
-            # paragrah(m1_intro, "1) 48 × 5 \n48 × 10= 480\n480 ÷ 2 = 240", 6)
-            # paragrah(m1_intro, "2) 79 × 5 \n79 × 10= 790\n790 ÷ 2 = 395", 7)
-            # heading(m1_intro, "Quick Application", 1, 8)
-            # paragrah(m1_intro, " Financial modeling (quick tip/discount calculations)\nSoftware engineering (cheap integer scaling in embedded systems)\nEveryday estimation (splitting bills, quick unit conversions)", 9)
-            # m1_intro.grid(column=1, row=0, sticky="nswe")    
-            # math_sc_1.grid(sticky="nswe",row=0,column=0)
-            question_loader(pra_q, pq.msc1_questions, 0)
-    if mtask == 2:
-            
-            math_sc_1 = CTkFrame(maths)
-            math_sc_1.grid(row=0,column=0,sticky="nswe") 
-            math_sc_1.grid_columnconfigure(0, weight=0)  # Back button column (fixed width)
-            math_sc_1.grid_columnconfigure(1, weight=1)  # Content column (EXPANDS to fill screen)
-            math_sc_1.grid_columnconfigure(2, weight=0)  # Front button column (fixed width)
-
-            back_b = CTkButton(math_sc_1, text="«", width=60, font=("Nasalization", 40), command=lambda: back(back_b))
-            back_b.grid(column=0, row=0, sticky="w", padx=3)
-
-            front_b = CTkButton(math_sc_1, text="»", font=("Nasalization", 40), width=60, command=lambda: front(front_b))
-            front_b.grid(column=2, row=0, sticky="e", padx=3)
-
-            m1_pra = CTkFrame(math_sc_1)
-            m1_pra.columnconfigure(0,weight=1)
-            m1_pra.rowconfigure(1,weight=1)
-            heading(m1_pra,"Practice Questions",0,0)
-        
-            pra_q = CTkFrame(m1_pra)
-            pra_q.columnconfigure(0,weight=1)
-        
-            question_loader(pra_q,pq.msc2_questions,0)
-            pra_q.grid(row=1,column=0,sticky="nsew",pady=5,padx=3.5)
-            m1_pra.grid(column=1, row=0, sticky="nswe")
-            
-            #INTRODUCTION
-            
-            m1_intro = CTkFrame(math_sc_1)
-            m1_intro.columnconfigure(0,weight=1)
-            heading(m1_intro, "Multiplying Numbers Near a Common Base", 0, 0)
-            heading(m1_intro, "Core Principle", 1, 1)
-            paragrah(m1_intro, "For numbers close to a base B (like 100), write each as B+x and B+y; then (B+x)(B+y) = B² + B(x+y) + xy, which is fast because B² and B(x+y) are simple base-shifts.", 2)
-            heading(m1_intro, "The Rule", 1, 3)
-            paragrah(m1_intro, "1. Choose base B (e.g., 100) and find each number's offset from B (x, y — can be negative).\n2. Compute the 'cross term' B + x + y for the leading part.\n3. Compute x×y for the trailing part and combine (append/add with carry).", 4)
-            heading(m1_intro, "Examples", 1, 5)
-            paragrah(m1_intro, "1) 97 × 94 (B=100, x=−3, y=−6) → leading: 100−3−6=91 → trailing: (−3)×(−6)=18 → **9118**", 6)
-            paragrah(m1_intro, "2) 798 × 95 (B=100, x=−2, y=−5) → leading: 100−2−5=93 → trailing: (−2)×(−5)=10 → 9310", 7)
-            heading(m1_intro, "Quick Application", 1, 8)
-            paragrah(m1_intro, "-Software engineering: basis for fast multiplication algorithms (Karatsuba-style decomposition).\n- Financial modeling: quick estimates when prices cluster near round figures (e.g., ~$100 items).\n- Everyday estimation: shopping/retail quick math near round price points.", 9)
-            m1_intro.grid(column=1, row=0, sticky="nswe")    
-            math_sc_1.grid(sticky="nswe",row=0,column=0)
 def shortcut_repeater(no):
         global msc_l
         sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
         arrow_button = CTkButton(math_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
-        command=lambda mtask=no:mtasks(mtask))  
+        command=lambda mtask=no: mtasks(mtask, maths, math_frame, heading, paragrah))  
         arrow_button.grid(row=no-1,column=1)
         sc.grid(row=no-1,column=0,pady=10)
 
