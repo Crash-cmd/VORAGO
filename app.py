@@ -4,6 +4,7 @@ from PIL import Image, ImageTk  # Ensure ImageTk is imported
 import json,time
 import practice_questions as pq
 from math_questions import mtasks, question_loader
+from phy_questions import ptasks,question_loader
 #import login1 ,login_2
 
 with open('credits.json','r') as f:
@@ -110,40 +111,6 @@ def font_chk():
             fsc.configure(font=("Fira Sans Condensed",f_size))
         info_l.update()
 
-msc_l = [
-    "Multiplying by 5",
-    "Multiplying/Dividing by Powers of 10",
-    "Compensation Method for Addition/Subtraction",
-    "Squaring Numbers Ending in 5",
-    "The Percentage Swap Trick",
-    "Multiplying by 9 (and Near-Power-of-10 Numbers)",
-    "Multiplying Two-Digit Numbers by 11",
-    "Divisibility Rules (3, 9, 11)",
-    "Mental Multiplication via Difference of Squares",
-    "Multiplying Numbers Near a Common Base",
-    "Vedic Cross-Multiplication (Two-Digit × Two-Digit)",
-    "Fast Squaring Near a Base (a² = (a−d)(a+d) + d²)",
-    "Rule of 72 (Exponential Doubling Time)",
-    "Casting Out Nines (Digit-Sum Verification)",
-    "Order-of-Magnitude (Fermi) Estimation",
-    "Linear Interpolation for Quick Estimates",
-    "Babylonian Method for Square Roots (Manual Iteration)",
-    "Fast Cube Root Estimation",
-    "Fast Exponentiation by Squaring",
-    "Last-Digit Cycles via Modular Arithmetic",
-    "Newton's Method for General Root Approximation",
-    "Modular Exponentiation (Fast Modpow)",
-    "Extended Euclidean Algorithm & Modular Inverse",
-    "Fermat's Little Theorem Shortcut",
-    "Quick Determinant & Geometric Meaning (2×2 Matrix)",
-    "Sarrus' Rule for 3×3 Determinants",
-    "Quick Eigenvalue Estimate via Trace & Determinant (2×2)",
-    "Taylor Series Linear Approximation, (1+x)ⁿ ≈ 1+nx",
-    "Stirling's Approximation for Factorials",
-    "Chinese Remainder Theorem (Fast System Reconstruction)"
-]
-    
-
 def heading(parent,content,p,row):
         
     if p ==0:
@@ -160,13 +127,24 @@ def paragrah(parent,content,row):
 page_no = 1
 
 
-def shortcut_repeater(no):
-        global msc_l
+def mshortcut_repeater(no):
         sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
         arrow_button = CTkButton(math_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
         command=lambda mtask=no: mtasks(mtask, maths, math_frame, heading, paragrah))  
         arrow_button.grid(row=no-1,column=1)
         sc.grid(row=no-1,column=0,pady=10)
+def pshortcut_repeater(no):
+        sc = CTkLabel(phy_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
+        arrow_button = CTkButton(phy_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
+        command=lambda ptask=no: ptasks(ptask, phy, phy_frame, heading, paragrah))  
+        arrow_button.grid(row=no-1,column=1)
+        sc.grid(row=no-1,column=0,pady=10)
+# def cshortcut_repeater(no):
+#         sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
+#         arrow_button = CTkButton(math_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
+#         command=lambda mtask=no: mtasks(mtask, maths, math_frame, heading, paragrah))  
+#         arrow_button.grid(row=no-1,column=1)
+#         sc.grid(row=no-1,column=0,pady=10)
 
 
 if __name__ =="__main__":
@@ -320,20 +298,23 @@ if __name__ =="__main__":
         
         math_frame = CTkFrame(maths,corner_radius=2,fg_color="#1c1b1b",width=20)
         math_frame.grid(sticky="nswe",pady=5,row=0,column=0)
-        for math_i in range(1,31):
-            shortcut_repeater(math_i)
+        math_frame.columnconfigure(0,weight=1)
+        for math_i in range(1,11):
+            mshortcut_repeater(math_i)
         
         maths.columnconfigure(0,weight=1)  
         maths.rowconfigure(1,weight=1)           
         maths.rowconfigure(0,weight=1) 
         maths.grid_forget()
 
-        phy = CTkFrame(main_frame)
-        label2 = CTkLabel(phy,text="TAB 2")
-        label2.grid(row=0,column=0)
+        phy = CTkScrollableFrame(main_frame)
+        phy_frame = CTkFrame(phy)
+        phy_frame.columnconfigure(0,weight=1)
+        for phy_i in range(1,11):
+            pshortcut_repeater(phy_i)
+        phy_frame.grid(row=0,column=0,sticky="nswe")
         phy.rowconfigure(0,weight=1)
         phy.columnconfigure(0,weight=1)
-        phy.configure(fg_color = "black",border_color = "#424242",border_width = 5,corner_radius=50)
         phy.grid_forget()
 
         chem = CTkFrame(main_frame)
