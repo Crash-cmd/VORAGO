@@ -4,20 +4,20 @@ from PIL import Image, ImageTk  # Ensure ImageTk is imported
 import json,time
 import practice_questions as pq
 from math_questions import mtasks, question_loader
-from phy_questions import ptasks,question_loader
+from phy_questions import ptasks, question_loader as phy_question_loader
 #import login1 ,login_2
 
 with open('credits.json','r') as f:
     credit = json.load(f)
 
 def l_d():
-    if l_dswitch.get() ==1 :
-        l_dswitch.configure(text="Switch to Dark Mode",button_color = "black",button_hover_color="black")
-        
-
-    elif l_dswitch.get()==0:
-        l_dswitch.configure(text="Switch to Light Mode",button_color = "white",button_hover_color="white")
-        # set_appearance_mode("dark")
+    """Toggle the app appearance without changing the page/navigation logic."""
+    if l_dswitch.get() == 1:
+        set_appearance_mode("light")
+        l_dswitch.configure(text="Switch to Dark Mode")
+    else:
+        set_appearance_mode("dark")
+        l_dswitch.configure(text="Switch to Light Mode")
 
 
 usr = 1
@@ -150,11 +150,15 @@ def pshortcut_repeater(no):
 if __name__ =="__main__":
     if True:#login_2.login_procces== True:
         app_window = CTk()
-        app_window.geometry("1980x1020")
+        app_window.title("VORAGO | Learning Dashboard")
+        app_window.geometry("1280x800")
+        app_window.minsize(900, 600)
+        set_appearance_mode("dark")
+        set_default_color_theme("blue")
 
         #Side Pannel-------------------------------------------
         side_pannel =  CTkFrame(app_window)
-        side_pannel.configure(fg_color = "#2a2b2a",corner_radius=10)
+        side_pannel.configure(fg_color=("#e9eef5", "#20242c"), corner_radius=14, border_width=1, border_color=("#d5dce7", "#303744"))
 
 
 
@@ -178,27 +182,27 @@ if __name__ =="__main__":
         icon = Image.open("images/icon.png")
 
         user_account = CTkButton(side_pannel,image=CTkImage(icon,size=(40,40)),text="",width=40,height=40,
-                                hover_color="black",bg_color="transparent",fg_color="transparent",command=taskbar1)
+                                hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar1)
         user_account.grid(column=1,row=0)
 
         math = CTkButton(side_pannel,image=CTkImage(light_image=math_d,dark_image=math_l,size=(40,40)),width=40,height=40,text="",
-                            hover_color="black",bg_color="transparent",fg_color="transparent",command=taskbar2)
+                            hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar2)
         math.grid(column=2,row=0)
 
         phy = CTkButton(side_pannel,image=CTkImage(light_image=phy_d,dark_image=phy_l,size=(40,40)),text="",width=40,height=40,
-                        hover_color="black",bg_color="transparent",fg_color="transparent",command=taskbar3)
+                        hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar3)
         phy.grid(column=3,row=0)
 
 
         chem = CTkButton(side_pannel,image=CTkImage(light_image=chem_d,dark_image=chem_l,size=(40,40))
-                        ,text="",width=40,height=40,hover_color="black",bg_color="transparent",fg_color="transparent",command=taskbar4)
+                        ,text="",width=40,height=40,hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar4)
 
 
         chem.grid(column=4,row=0)
 
 
         logo5= CTkButton(side_pannel,image=CTkImage(light_image=gear_d,dark_image=gear_l,size=(40,40))
-                        ,text="",width=40,height=40,hover_color="black",bg_color="transparent",fg_color="transparent",command=taskbar5)
+                        ,text="",width=40,height=40,hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar5)
         logo5.grid(column=5,row=0)
 
         side_pannel.columnconfigure(0,weight=1)
@@ -231,7 +235,7 @@ if __name__ =="__main__":
 
         #UserPage______________________________________________________________________________________________________________________________________
         user = CTkFrame(main_frame)
-        user.configure(fg_color = "#232423")
+        user.configure(fg_color=("gray96", "#171a21"), corner_radius=14)
         user.rowconfigure(0,weight=1)
         user.rowconfigure(1,weight=1)
         user.columnconfigure(0,weight=1)
@@ -246,7 +250,7 @@ if __name__ =="__main__":
         info_user.rowconfigure(1,weight=1)
         info_user.columnconfigure(0,weight=1)
         user_name = CTkEntry(info_user,state='normal')
-        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),30),anchor="center",text_color="White")
+        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),30),anchor="center",text_color=("gray15", "white"))
         info_l.grid(row=0,column=0)
 
         user_name.insert(0,credit["username"])
@@ -272,19 +276,19 @@ if __name__ =="__main__":
         spacer_row = CTkLabel(badge,text="")
         spacer_row.grid(column=0,row=1)
         accurate_label = CTkLabel(badge,image=CTkImage(accurate,size=(80,80)),text="Accurate",compound=TOP,font=("Nasalization",20),
-                                fg_color="#706e6e",corner_radius=10,border_color="#474747",border_width=2)
+                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
         accurate_label.grid(column=0,row=2)
         placeholder1 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color="#706e6e",corner_radius=10,border_color="#474747",border_width=2)
+                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
         placeholder1.grid(column=1,row=2)
         placeholder2 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color="#706e6e",corner_radius=10,border_color="#474747",border_width=2)
+                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
         placeholder2.grid(column=2,row=2)
         placeholder3 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color="#706e6e",corner_radius=10,border_color="#474747",border_width=2)
+                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
         placeholder3.grid(column=3,row=2)
         placeholder4 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color="#706e6e",corner_radius=10,border_color="#474747",border_width=2)
+                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
         placeholder4.grid(column=4,row=2)
         for i in range(0,11):
             badge.columnconfigure(i,weight=1)
@@ -296,7 +300,7 @@ if __name__ =="__main__":
 
         maths= CTkScrollableFrame(main_frame)
         
-        math_frame = CTkFrame(maths,corner_radius=2,fg_color="#1c1b1b",width=20)
+        math_frame = CTkFrame(maths,corner_radius=12,fg_color=("#f1f4f9", "#1c2029"),width=20)
         math_frame.grid(sticky="nswe",pady=5,row=0,column=0)
         math_frame.columnconfigure(0,weight=1)
         for math_i in range(1,11):
@@ -322,10 +326,10 @@ if __name__ =="__main__":
         label3.grid(row=0,column=0)
         chem.rowconfigure(0,weight=1)
         chem.columnconfigure(0,weight=1)
-        chem.configure(fg_color = "black",border_color = "#424242",border_width = 5,corner_radius=50)
+        chem.configure(fg_color=("#f1f4f9", "#171a21"),border_color=("#d5dce7", "#303744"),border_width=1,corner_radius=18)
         chem.grid_forget()
 
-        settings = CTkFrame(main_frame,fg_color="#232423")
+        settings = CTkFrame(main_frame,fg_color=("gray96", "#171a21"),corner_radius=14)
         l_dswitch = CTkSwitch(settings,text="Switch to Light Mode",command=l_d,corner_radius=0,font=("Fira Sans Condensed",20))
         l_dswitch.grid(column=0,row=0,sticky="w")
         tit_var = StringVar(value="Fira Sans Condensed")
@@ -387,5 +391,5 @@ if __name__ =="__main__":
         #--------------------------------------------------------
         app_window.columnconfigure(0,weight = 2)
         app_window.rowconfigure(2,weight =2)
-        app_window.configure(fg_color ="black")
+        app_window.configure(fg_color=("#f5f7fb", "#111318"))
         app_window.mainloop()
