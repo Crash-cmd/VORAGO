@@ -11,13 +11,26 @@ with open('credits.json','r') as f:
     credit = json.load(f)
 
 def l_d():
-    """Toggle the app appearance without changing the page/navigation logic."""
+    """Switch between the two coordinated VORAGO color palettes."""
     if l_dswitch.get() == 1:
         set_appearance_mode("light")
         l_dswitch.configure(text="Switch to Dark Mode")
     else:
         set_appearance_mode("dark")
         l_dswitch.configure(text="Switch to Light Mode")
+
+
+# VORAGO event-horizon palette: soft mineral light mode + deep-space dark mode.
+BG = ("#e7e6eb", "#080910")
+SURFACE = ("#dedde5", "#10121c")
+CARD = ("#d4d3de", "#171a28")
+BORDER = ("#c4c3d1", "#292b40")
+TEXT = ("#252536", "#f0eff8")
+MUTED = ("#6d6b80", "#a0a1ba")
+ACCENT = ("#7657d9", "#a18aff")
+ACCENT_HOVER = ("#6849c8", "#8870ed")
+HOVER = ("#d0cde0", "#24263a")
+
 
 
 usr = 1
@@ -117,31 +130,31 @@ def heading(parent,content,p,row):
             label = CTkLabel(parent,text=content,font=("Nasalization",50),anchor="n",justify="center")
             label.grid(sticky ="n",row=row,column=0)
     if p ==1:
-            label = CTkLabel(parent,text=content,font=("Nasalization",50),text_color="#0377fc")
+            label = CTkLabel(parent,text=content,font=("Nasalization",50),text_color=ACCENT)
             label.grid(sticky="w",row=row,column=0)
 
 def paragrah(parent,content,row):
-    label = CTkLabel(parent,text=content,font=("Fira Sans Condensed",30),justify="left",wraplength="1500")
+    label = CTkLabel(parent,text=content,font=("Fira Sans Condensed",30),justify="left",wraplength="1100",text_color=TEXT)
     label.grid(sticky="w",row=row,column=0,padx=60,pady=20)
 
 page_no = 1
 
 
 def mshortcut_repeater(no):
-        sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
-        arrow_button = CTkButton(math_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
+        sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",30),fg_color="transparent",text_color=TEXT)
+        arrow_button = CTkButton(math_frame,text="➜",font=("arial",28),fg_color=ACCENT,text_color="#ffffff",hover_color=ACCENT_HOVER,width=44,height=40,corner_radius=12,bg_color="transparent",
         command=lambda mtask=no: mtasks(mtask, maths, math_frame, heading, paragrah))  
         arrow_button.grid(row=no-1,column=1)
         sc.grid(row=no-1,column=0,pady=10)
 def pshortcut_repeater(no):
-        sc = CTkLabel(phy_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
-        arrow_button = CTkButton(phy_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
+        sc = CTkLabel(phy_frame,text=f"Shortcut {no}",font=("Nasalization",30),fg_color="transparent",text_color=TEXT)
+        arrow_button = CTkButton(phy_frame,text="➜",font=("arial",28),fg_color=ACCENT,text_color="#ffffff",hover_color=ACCENT_HOVER,width=44,height=40,corner_radius=12,bg_color="transparent",
         command=lambda ptask=no: ptasks(ptask, phy, phy_frame, heading, paragrah))  
         arrow_button.grid(row=no-1,column=1)
         sc.grid(row=no-1,column=0,pady=10)
 # def cshortcut_repeater(no):
-#         sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",40),fg_color="transparent")
-#         arrow_button = CTkButton(math_frame,text="➜",font=("arial",40),fg_color="#706e6e",text_color="white",width=10,bg_color="transparent",
+#         sc = CTkLabel(math_frame,text=f"Shortcut {no}",font=("Nasalization",30),fg_color="transparent",text_color=TEXT)
+#         arrow_button = CTkButton(math_frame,text="➜",font=("arial",28),fg_color=ACCENT,text_color="#ffffff",hover_color=ACCENT_HOVER,width=44,height=40,corner_radius=12,bg_color="transparent",
 #         command=lambda mtask=no: mtasks(mtask, maths, math_frame, heading, paragrah))  
 #         arrow_button.grid(row=no-1,column=1)
 #         sc.grid(row=no-1,column=0,pady=10)
@@ -158,7 +171,7 @@ if __name__ =="__main__":
 
         #Side Pannel-------------------------------------------
         side_pannel =  CTkFrame(app_window)
-        side_pannel.configure(fg_color=("#e9eef5", "#20242c"), corner_radius=14, border_width=1, border_color=("#d5dce7", "#303744"))
+        side_pannel.configure(fg_color=SURFACE, corner_radius=16, border_width=1, border_color=BORDER)
 
 
 
@@ -177,7 +190,7 @@ if __name__ =="__main__":
         #Images ____________________________________________________________________
 
         #Taskbar ____________________________________________________________________
-        logo = CTkLabel(side_pannel,image=CTkImage(logo_img,size=(50,50)),text="VORAGO",font=("Nasalization",20),compound=LEFT)
+        logo = CTkLabel(side_pannel,image=CTkImage(logo_img,size=(50,50)),text="VORAGO",font=("Nasalization",20),text_color=TEXT,compound=LEFT)
         logo.grid(column=0,row=0)
         icon = Image.open("images/icon.png")
 
@@ -221,74 +234,74 @@ if __name__ =="__main__":
         #-------------------------------------------------------------------------------
 
         #Main frame display ------------------------------------
-        main_frame = CTkFrame(app_window)
+        main_frame = CTkFrame(app_window, fg_color=BG, corner_radius=0)
         
-        home_page = CTkFrame(main_frame)
+        home_page = CTkFrame(main_frame, fg_color=BG, corner_radius=0)
         home_page.rowconfigure(0,weight=1)
         home_page.columnconfigure(0,weight=1)
         home_page.rowconfigure(1,weight=1)
         logo_label = CTkLabel(home_page,text="VORAGO \n HOME",fg_color="transparent",font=("Nasalization",70),compound=BOTTOM,height=10)
-        text_l =CTkLabel(home_page,text="Click the icons above to continue",fg_color="transparent",font=("Arial",70),compound=BOTTOM)
+        text_l =CTkLabel(home_page,text="Choose a subject to begin",fg_color="transparent",font=("Arial",24),text_color=MUTED,compound=BOTTOM)
         text_l.grid(column = 0, row= 1)
         logo_label.grid(column = 0, row= 0)
         home_page.grid(sticky="nsew")
 
         #UserPage______________________________________________________________________________________________________________________________________
         user = CTkFrame(main_frame)
-        user.configure(fg_color=("gray96", "#171a21"), corner_radius=14)
+        user.configure(fg_color=BG, corner_radius=16, border_width=1, border_color=BORDER)
         user.rowconfigure(0,weight=1)
         user.rowconfigure(1,weight=1)
         user.columnconfigure(0,weight=1)
         user.columnconfigure(1,weight=1)
 
-        stats = CTkFrame(user,fg_color="transparent",border_color="#2d2e2e",border_width=2)
+        stats = CTkFrame(user,fg_color=CARD,border_color=BORDER,border_width=1,corner_radius=14)
         stats.grid(column=0,row=0,sticky="nswe")
 
         tit_var = StringVar(value="Fira Sans Condensed")
-        info_user = CTkScrollableFrame(user,fg_color="transparent",border_color="#2d2e2e",border_width=2)
+        info_user = CTkScrollableFrame(user,fg_color=SURFACE,border_color=BORDER,border_width=1,corner_radius=14)
         info_user.rowconfigure(0,weight=1)
         info_user.rowconfigure(1,weight=1)
         info_user.columnconfigure(0,weight=1)
         user_name = CTkEntry(info_user,state='normal')
-        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),30),anchor="center",text_color=("gray15", "white"))
+        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),26),anchor="center",text_color=TEXT)
         info_l.grid(row=0,column=0)
 
         user_name.insert(0,credit["username"])
         user_name.configure(state="readonly")
-        ch_usr = CTkButton(info_user,text="Change Username",command=ch_usrname)
+        ch_usr = CTkButton(info_user,text="Change Username",command=ch_usrname,fg_color=ACCENT,hover_color=ACCENT_HOVER,text_color="#ffffff",corner_radius=10,height=36)
         ch_usr.grid(row=1,column=1)
         user_name.grid(column =0,row=1,sticky="we",pady=10)
 
         password = CTkEntry(info_user,state='normal',show="*")
         password.insert(0,credit["password"])
         password.configure(state="readonly")
-        ch_pass = CTkButton(info_user,text="Change password",command=ch_password)
+        ch_pass = CTkButton(info_user,text="Change password",command=ch_password,fg_color=ACCENT,hover_color=ACCENT_HOVER,text_color="#ffffff",corner_radius=10,height=36)
         ch_pass.grid(row=2,column=1)
         password.grid(column =0,row=2,sticky="we",pady=10)
 
 
         info_user.grid(column=1,row=0,sticky="nswe")
 
-        badge = CTkFrame(user,fg_color="transparent",border_color="#2d2e2e",border_width=2)
-        badge_l = CTkLabel(badge,text="BADGES",font=("Fira Sans Condensed",30))
+        badge = CTkFrame(user,fg_color=SURFACE,border_color=BORDER,border_width=1,corner_radius=14)
+        badge_l = CTkLabel(badge,text="BADGES",font=("Fira Sans Condensed",30),text_color=TEXT)
         badge_l.grid(column=0,row=0)
 
         spacer_row = CTkLabel(badge,text="")
         spacer_row.grid(column=0,row=1)
         accurate_label = CTkLabel(badge,image=CTkImage(accurate,size=(80,80)),text="Accurate",compound=TOP,font=("Nasalization",20),
-                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
+                                fg_color=CARD,corner_radius=12,border_color=BORDER,border_width=1,text_color=TEXT)
         accurate_label.grid(column=0,row=2)
         placeholder1 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
+                                fg_color=CARD,corner_radius=12,border_color=BORDER,border_width=1,text_color=TEXT)
         placeholder1.grid(column=1,row=2)
         placeholder2 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
+                                fg_color=CARD,corner_radius=12,border_color=BORDER,border_width=1,text_color=TEXT)
         placeholder2.grid(column=2,row=2)
         placeholder3 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
+                                fg_color=CARD,corner_radius=12,border_color=BORDER,border_width=1,text_color=TEXT)
         placeholder3.grid(column=3,row=2)
         placeholder4 = CTkLabel(badge,image=CTkImage(placeholder_badge,size=(80,80)),text="LOCKED",compound=TOP,font=("Nasalization",20),
-                                fg_color=("#e5eaf2", "#343b48"),corner_radius=12,border_color=("#cbd4e2", "#485365"),border_width=1)
+                                fg_color=CARD,corner_radius=12,border_color=BORDER,border_width=1,text_color=TEXT)
         placeholder4.grid(column=4,row=2)
         for i in range(0,11):
             badge.columnconfigure(i,weight=1)
@@ -298,9 +311,9 @@ if __name__ =="__main__":
         #________________________________________________________________________________________________________________________________________
     
 
-        maths= CTkScrollableFrame(main_frame)
+        maths= CTkScrollableFrame(main_frame, fg_color=BG, corner_radius=0)
         
-        math_frame = CTkFrame(maths,corner_radius=12,fg_color=("#f1f4f9", "#1c2029"),width=20)
+        math_frame = CTkFrame(maths,corner_radius=16,fg_color=BG,width=20)
         math_frame.grid(sticky="nswe",pady=5,row=0,column=0)
         math_frame.columnconfigure(0,weight=1)
         for math_i in range(1,11):
@@ -311,8 +324,8 @@ if __name__ =="__main__":
         maths.rowconfigure(0,weight=1) 
         maths.grid_forget()
 
-        phy = CTkScrollableFrame(main_frame)
-        phy_frame = CTkFrame(phy)
+        phy = CTkScrollableFrame(main_frame, fg_color=BG, corner_radius=0)
+        phy_frame = CTkFrame(phy, fg_color=BG, corner_radius=16)
         phy_frame.columnconfigure(0,weight=1)
         for phy_i in range(1,11):
             pshortcut_repeater(phy_i)
@@ -321,22 +334,22 @@ if __name__ =="__main__":
         phy.columnconfigure(0,weight=1)
         phy.grid_forget()
 
-        chem = CTkFrame(main_frame)
+        chem = CTkFrame(main_frame, fg_color=BG)
         label3 = CTkLabel(chem,text="TAB 3")
         label3.grid(row=0,column=0)
         chem.rowconfigure(0,weight=1)
         chem.columnconfigure(0,weight=1)
-        chem.configure(fg_color=("#f1f4f9", "#171a21"),border_color=("#d5dce7", "#303744"),border_width=1,corner_radius=18)
+        chem.configure(fg_color=CARD,border_color=BORDER,border_width=1,corner_radius=16)
         chem.grid_forget()
 
-        settings = CTkFrame(main_frame,fg_color=("gray96", "#171a21"),corner_radius=14)
-        l_dswitch = CTkSwitch(settings,text="Switch to Light Mode",command=l_d,corner_radius=0,font=("Fira Sans Condensed",20))
+        settings = CTkFrame(main_frame,fg_color=BG,corner_radius=0)
+        l_dswitch = CTkSwitch(settings,text="Switch to Light Mode",command=l_d,corner_radius=8,font=("Fira Sans Condensed",18),text_color=TEXT,progress_color=ACCENT,button_color=("#f7f5ff", "#ded9ff"),button_hover_color=ACCENT_HOVER)
         l_dswitch.grid(column=0,row=0,sticky="w")
         tit_var = StringVar(value="Fira Sans Condensed")
         con_var = StringVar(value="Fira Sans Condensed")
 
-        font_frame = CTkFrame(settings)
-        font_l = CTkLabel(font_frame,text="FONTs",font=("Fira Sans Condensed",40))
+        font_frame = CTkFrame(settings,fg_color=SURFACE,corner_radius=14,border_width=1,border_color=BORDER)
+        font_l = CTkLabel(font_frame,text="FONTs",font=("Fira Sans Condensed",34),text_color=TEXT)
         font_l.grid(column=0,row=0,sticky="w",pady=10)
         title_font = CTkLabel(font_frame,text="Title",font=("Fira Sans Condensed",30))
         title_font.grid(column=0,row=1,sticky='w')
@@ -364,8 +377,8 @@ if __name__ =="__main__":
 
 
         pan_var = IntVar(value=1)
-        pannel_mode = CTkFrame(settings)
-        pannel_text= CTkLabel(pannel_mode,text="Pannel Orientation",font=("Fira Sans Condensed",40))
+        pannel_mode = CTkFrame(settings,fg_color=SURFACE,corner_radius=14,border_width=1,border_color=BORDER)
+        pannel_text= CTkLabel(pannel_mode,text="Pannel Orientation",font=("Fira Sans Condensed",34),text_color=TEXT)
         pannel_text.grid(column=0,row=0,sticky="w")
         pannel_normal = CTkRadioButton(pannel_mode,text="Horizontal(Default)",font=("Fira Sans Condensed",20),variable=pan_var,value=1)
         pannel_normal.grid(column=0,row=1)
@@ -391,5 +404,5 @@ if __name__ =="__main__":
         #--------------------------------------------------------
         app_window.columnconfigure(0,weight = 2)
         app_window.rowconfigure(2,weight =2)
-        app_window.configure(fg_color=("#f5f7fb", "#111318"))
+        app_window.configure(fg_color=BG)
         app_window.mainloop()
