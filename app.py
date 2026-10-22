@@ -195,27 +195,27 @@ if __name__ =="__main__":
         icon = Image.open("images/icon.png")
 
         user_account = CTkButton(side_pannel,image=CTkImage(icon,size=(40,40)),text="",width=40,height=40,
-                                hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar1)
+                                hover_color=HOVER,bg_color="transparent",fg_color="transparent",command=taskbar1)
         user_account.grid(column=1,row=0)
 
         math = CTkButton(side_pannel,image=CTkImage(light_image=math_d,dark_image=math_l,size=(40,40)),width=40,height=40,text="",
-                            hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar2)
+                            hover_color=HOVER,bg_color="transparent",fg_color="transparent",command=taskbar2)
         math.grid(column=2,row=0)
 
         phy = CTkButton(side_pannel,image=CTkImage(light_image=phy_d,dark_image=phy_l,size=(40,40)),text="",width=40,height=40,
-                        hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar3)
+                        hover_color=HOVER,bg_color="transparent",fg_color="transparent",command=taskbar3)
         phy.grid(column=3,row=0)
 
 
         chem = CTkButton(side_pannel,image=CTkImage(light_image=chem_d,dark_image=chem_l,size=(40,40))
-                        ,text="",width=40,height=40,hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar4)
+                        ,text="",width=40,height=40,hover_color=HOVER,bg_color="transparent",fg_color="transparent",command=taskbar4)
 
 
         chem.grid(column=4,row=0)
 
 
         logo5= CTkButton(side_pannel,image=CTkImage(light_image=gear_d,dark_image=gear_l,size=(40,40))
-                        ,text="",width=40,height=40,hover_color=("#dce6f5", "#303744"),bg_color="transparent",fg_color="transparent",command=taskbar5)
+                        ,text="",width=40,height=40,hover_color=HOVER,bg_color="transparent",fg_color="transparent",command=taskbar5)
         logo5.grid(column=5,row=0)
 
         side_pannel.columnconfigure(0,weight=1)
@@ -240,7 +240,7 @@ if __name__ =="__main__":
         home_page.rowconfigure(0,weight=1)
         home_page.columnconfigure(0,weight=1)
         home_page.rowconfigure(1,weight=1)
-        logo_label = CTkLabel(home_page,text="VORAGO \n HOME",fg_color="transparent",font=("Nasalization",70),compound=BOTTOM,height=10)
+        logo_label = CTkLabel(home_page,text="VORAGO \n HOME",fg_color="transparent",font=("Nasalization",64),text_color=TEXT,compound=BOTTOM,height=10)
         text_l =CTkLabel(home_page,text="Choose a subject to begin",fg_color="transparent",font=("Arial",24),text_color=MUTED,compound=BOTTOM)
         text_l.grid(column = 0, row= 1)
         logo_label.grid(column = 0, row= 0)
@@ -335,7 +335,7 @@ if __name__ =="__main__":
         phy.grid_forget()
 
         chem = CTkFrame(main_frame, fg_color=BG)
-        label3 = CTkLabel(chem,text="TAB 3")
+        label3 = CTkLabel(chem,text="Chemistry",font=("Nasalization",32),text_color=TEXT)
         label3.grid(row=0,column=0)
         chem.rowconfigure(0,weight=1)
         chem.columnconfigure(0,weight=1)
