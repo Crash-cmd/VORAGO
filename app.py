@@ -149,12 +149,12 @@ def pshortcut_repeater(no):
 
 if __name__ =="__main__":
     if True:#login_2.login_procces== True:
+        set_default_color_theme("blue")
+        set_appearance_mode("dark")
         app_window = CTk()
         app_window.title("VORAGO | Learning Dashboard")
         app_window.geometry("1280x800")
         app_window.minsize(900, 600)
-        set_appearance_mode("dark")
-        set_default_color_theme("blue")
 
         #Side Pannel-------------------------------------------
         side_pannel =  CTkFrame(app_window)
