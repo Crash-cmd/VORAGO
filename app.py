@@ -11,12 +11,63 @@ import sys
 import subprocess
 
 #import login1 ,login_2
-set_appearance_mode("Dark")
-set_default_color_theme("app_theme_black_gold.json")
+# Theme files available in the Settings dropdown.
+THEME_FILES = {
+    "Default": "app_theme.json",
+    "Rich": "app_theme_black_gold.json",
+    "Modern Sleek": "app_theme_clean_modern.json",
+    "Cosmic Blue": "app_theme_blue_cosmic.json",
+    "Aurora": "app_theme_cosmic_aurora.json",
+}
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# A restarted app receives the selected theme and appearance as command-line arguments.
+ACTIVE_THEME_FILE = os.path.basename(
+    sys.argv[1] if len(sys.argv) > 1 else "app_theme_black_gold.json"
+)
+if ACTIVE_THEME_FILE not in THEME_FILES.values():
+    ACTIVE_THEME_FILE = "app_theme_black_gold.json"
+
+ACTIVE_APPEARANCE = (
+    sys.argv[2].lower() if len(sys.argv) > 2 else "dark"
+)
+if ACTIVE_APPEARANCE not in ("light", "dark", "system"):
+    ACTIVE_APPEARANCE = "dark"
+
+set_appearance_mode(ACTIVE_APPEARANCE)
+set_default_color_theme(os.path.join(BASE_DIR, ACTIVE_THEME_FILE))
 
 
 with open('credits.json','r') as f:
     credit = json.load(f)
+
+def theme_switch(choice=None):
+    """Restart VORAGO with the selected JSON theme loaded before widgets are created."""
+    theme_file = THEME_FILES.get(t_switch.get())
+    if not theme_file:
+        return
+
+    appearance = "light" if l_dswitch.get() else "dark"
+    if theme_file == ACTIVE_THEME_FILE and appearance == ACTIVE_APPEARANCE:
+        return
+
+    try:
+        subprocess.Popen(
+            [
+                sys.executable,
+                os.path.abspath(__file__),
+                theme_file,
+                appearance,
+            ],
+            cwd=BASE_DIR,
+        )
+    except OSError as error:
+        print(f"Could not restart VORAGO to apply the theme: {error}")
+        return
+
+    app_window.destroy()
+
 
 def l_d():
     if l_dswitch.get() ==1 :
@@ -341,7 +392,16 @@ if __name__ =="__main__":
         Theme = CTkFrame(settings,corner_radius=20,border_width=3)
         l_dswitch = CTkSwitch(Theme,text="Switch to Light Mode",command=l_d,font=("Fira Sans Condensed",20))
         l_dswitch.grid(column=0,row=0,sticky="n",padx=8,pady=8)
-        t_switch = CTkOptionMenu(Theme,values=["Defualt","Rich","Modern Sleek","Cosmic Blue","Auora"],font=("Fira Sans Condensed",20),command=theme_switch)
+        t_switch = CTkOptionMenu(
+            Theme,
+            values=list(THEME_FILES.keys()),
+            font=("Fira Sans Condensed", 20),
+            command=theme_switch,
+        )
+        t_switch.set(next(
+            label for label, filename in THEME_FILES.items()
+            if filename == ACTIVE_THEME_FILE
+        ))
         t_switch.grid(row=1,column=0,sticky="w",padx=8,pady=8)
         Theme.grid(row=0,column=0,sticky="we")
 
