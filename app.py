@@ -152,7 +152,7 @@ if __name__ =="__main__":
 
         #Side Pannel-------------------------------------------
         side_pannel =  CTkFrame(app_window)
-        side_pannel.configure(fg_color = "#341e3d",corner_radius=10)
+        side_pannel.configure(corner_radius=10)
 
 
 
@@ -375,7 +375,7 @@ if __name__ =="__main__":
         info_user.rowconfigure(1,weight=1)
         info_user.columnconfigure(0,weight=1)
         user_name = CTkEntry(info_user,state='normal')
-        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),30),anchor="center",text_color="White")
+        info_l =  CTkLabel(info_user, text="USER INFORMATION",font=(tit_var.get(),30),anchor="center")
         info_l.grid(row=0,column=0,pady=8,padx=8)
 
         user_name.insert(0,credit["username"])
