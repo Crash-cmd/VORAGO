@@ -6,8 +6,13 @@ import practice_questions as pq
 from math_questions import mtasks, question_loader
 from phy_questions import ptasks,question_loader
 from chem_questions import ctasks,question_loader
+import os
+import sys
+import subprocess
+
 #import login1 ,login_2
-set_default_color_theme("app_theme.json")
+set_appearance_mode("Dark")
+set_default_color_theme("app_theme_black_gold.json")
 
 
 with open('credits.json','r') as f:
@@ -16,12 +21,12 @@ with open('credits.json','r') as f:
 def l_d():
     if l_dswitch.get() ==1 :
         l_dswitch.configure(text="Switch to Dark Mode")
+        set_appearance_mode("light")
         
 
     elif l_dswitch.get()==0:
         l_dswitch.configure(text="Switch to Light Mode")
-        # set_appearance_mode("dark")
-
+        set_appearance_mode("dark")
 
 usr = 1
 pas = 1
@@ -331,10 +336,16 @@ if __name__ =="__main__":
         chem.rowconfigure(0,weight=1)
         chem.columnconfigure(0,weight=1)
         chem.grid_forget()
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         settings = CTkFrame(main_frame)
-        l_dswitch = CTkSwitch(settings,text="Switch to Light Mode",command=l_d,corner_radius=0,font=("Fira Sans Condensed",20))
-        l_dswitch.grid(column=0,row=0,sticky="w")
+        Theme = CTkFrame(settings,corner_radius=20,border_width=3)
+        l_dswitch = CTkSwitch(Theme,text="Switch to Light Mode",command=l_d,font=("Fira Sans Condensed",20))
+        l_dswitch.grid(column=0,row=0,sticky="n",padx=8,pady=8)
+        t_switch = CTkOptionMenu(Theme,values=["Defualt","Rich","Modern Sleek","Cosmic Blue","Auora"],font=("Fira Sans Condensed",20),command=theme_switch)
+        t_switch.grid(row=1,column=0,sticky="w",padx=8,pady=8)
+        Theme.grid(row=0,column=0,sticky="we")
+
+
         tit_var = StringVar(value="Fira Sans Condensed")
         con_var = StringVar(value="Fira Sans Condensed")
 
