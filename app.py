@@ -390,8 +390,15 @@ if __name__ =="__main__":
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         settings = CTkFrame(main_frame)
         Theme = CTkFrame(settings,corner_radius=20,border_width=3)
-        l_dswitch = CTkSwitch(Theme,text="Switch to Light Mode",command=l_d,font=("Fira Sans Condensed",20))
+        l_dswitch = CTkSwitch(
+            Theme,
+            text="Switch to Dark Mode" if ACTIVE_APPEARANCE == "light" else "Switch to Light Mode",
+            command=l_d,
+            font=("Fira Sans Condensed", 20),
+        )
         l_dswitch.grid(column=0,row=0,sticky="n",padx=8,pady=8)
+        if ACTIVE_APPEARANCE == "light":
+            l_dswitch.select()
         t_switch = CTkOptionMenu(
             Theme,
             values=list(THEME_FILES.keys()),
