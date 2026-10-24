@@ -71,11 +71,11 @@ def question_loader(parent,qset,qno=0):
     ans_l.grid(sticky="s",row=5,column=0,pady=50)
 
 
-def ptasks(ptask, phy, phy_frame, heading, paragrah):
+def ptasks(ptask, phy, phy_frame, heading, paragrah,questions_data):
     page_no = 1
     
     phy_frame.grid_forget()
-    def create_phy_screen(parent, title, core_principle, rule, example_1, example_2, quick_application):
+    def create_phy_screen(parent, title, core_principle, rule, example_1, example_2, quick_application,questions_data):
         def back(button_pressed):
             global page_no
             page_no-=1
@@ -144,7 +144,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Multiply fractional or percentage errors of individual quantities by their respective powers.\n2. Always add them together (errors never cancel out).",
             example_1="1) Z = A²B / C\nΔZ/Z = 2(ΔA/A) + 1(ΔB/B) + 1(ΔC/C)",
             example_2="2) Error in A is 1% (power 2) and B is 2% (power 1)\nMax error = 2(1%) + 1(2%) = 4%",
-            quick_application="Experimental phy error analysis\nCompetitive exam quick calculations\nLab data evaluation"
+            quick_application="Experimental phy error analysis\nCompetitive exam quick calculations\nLab data evaluation",
+            questions_data=pq.psc1_questions
         )
 
     if ptask == 2:
@@ -155,7 +156,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Identify complementary angles θ and 90° - θ for the same horizontal range.\n2. Use the product formula: T₁T₂ = 2R/g.",
             example_1="1) Angles 30° and 60° give equal range R.\nT₁T₂ = 2R/g",
             example_2="2) If T₁ = 2s and T₂ = 4s for same range, then 2 × 4 = 8 = 2R/g ⇒ R = 4g",
-            quick_application="Projectile motion problems in JEE/NEET\nBallistics and trajectory analysis"
+            quick_application="Projectile motion problems in JEE/NEET\nBallistics and trajectory analysis",
+            questions_data=pq.psc2_questions
         )
 
     if ptask == 3:
@@ -166,7 +168,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Height after nth bounce: h_n = e^(2n) * h₀.\n2. Total vertical distance: S_total = h₀ * ((1 + e²) / (1 - e²)).",
             example_1="1) Ball dropped from h₀ = 10m with e = 0.5.\nHeight after 1st bounce: h₁ = (0.5)² × 10 = 2.5m",
             example_2="2) Total vertical distance for h₀ = 10m, e = 0.5:\nS_total = 10 × (1 + 0.25) / (1 - 0.25) = 16.67m",
-            quick_application="Drop tests in material science\nMechanical bounce modeling in phy simulations"
+            quick_application="Drop tests in material science\nMechanical bounce modeling in phy simulations",
+            questions_data=pq.psc3_questions
         )
 
     if ptask == 4:
@@ -177,7 +180,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Identify string segments and their tensions.\n2. Apply virtual work principle: sum of the product of tension force and velocity/acceleration equals zero (Σ(T · a) = 0).",
             example_1="1) For blocks connected over a fixed pulley, relate velocities using string length constraints.",
             example_2="2) If a string segment moves downward with acceleration a, connected block moves upward with corresponding constraint ratio.",
-            quick_application="Complex pulley systems\nRobotics cable-drive mechanisms"
+            quick_application="Complex pulley systems\nRobotics cable-drive mechanisms",
+            questions_data=pq.psc4_questions
         )
 
     if ptask == 5:
@@ -188,7 +192,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Note that the product of spring constant and length remains constant.\n2. Use k₁l₁ = k₂l₂ = kL for cut pieces.",
             example_1="1) Spring of constant k cut into 2 equal halves (l/2 each):\nNew spring constant k' = 2k",
             example_2="2) Spring cut into ratio 1:3 lengths:\nConstants become 4k and (4/3)k respectively.",
-            quick_application="Mechanical vibration tuning\nDesigning spring-mass isolation systems"
+            quick_application="Mechanical vibration tuning\nDesigning spring-mass isolation systems",
+            questions_data=pq.psc5_questions
         )
 
     if ptask == 6:
@@ -199,7 +204,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Identify original body area/mass and cut-out area/mass.\n2. Apply negative mass formula: X_cm = (A₁x₁ - A₂x₂) / (A₁ - A₂).",
             example_1="1) Circular disk of radius R with a circular hole of radius R/2 cut out from the edge.",
             example_2="2) Apply area ratio: A₁ = πR², A₂ = π(R/2)² to find shifted X_cm instantly.",
-            quick_application="Aerospace structural weight balancing\nMechanical component design with cutouts"
+            quick_application="Aerospace structural weight balancing\nMechanical component design with cutouts",
+            questions_data=pq.psc6_questions
         )
 
     if ptask == 7:
@@ -210,7 +216,8 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Identify the geometry factor (k²/R²).\n2. Apply formula: a = (g sinθ) / (1 + k²/R²).",
             example_1="1) Solid cylinder/disk (k²/R² = 1/2):\na = (g sinθ) / (1 + 0.5) = (2/3)g sinθ",
             example_2="2) Solid sphere (k²/R² = 2/5):\na = (g sinθ) / (1 + 0.4) = (5/7)g sinθ",
-            quick_application="Conveyor belt system design\nVehicle dynamics on slopes"
+            quick_application="Conveyor belt system design\nVehicle dynamics on slopes",
+            questions_data=pq.psc7_questions
         )
 
     if ptask == 8:
@@ -220,8 +227,9 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             core_principle="A satellite orbiting very close to a planet's surface has a speed related directly to the planet's escape velocity by a factor of √2.",
             rule="1. Recall orbital speed for a surface-grazing orbit.\n2. Multiply by √2 to get escape velocity: v_escape = √2 × v_orbital.",
             example_1="1) If orbital speed for a low-earth orbit is v₀, escape velocity is v_e = √2 v₀",
-            example_2="2) Multiplying low-earth orbital speed (~7.9 km/s) by 1.414 yields escape velocity (~11.2 km/s).",
-            quick_application="Satellite launch window planning\nOrbital mechanics calculations"
+            example_2="2) Multiplying low-earth orbital speed (~7.9 km/s) by 1.414 yields escape ve,locity (~11.2 km/s).",
+            quick_application="Satellite launch window planning\nOrbital mechanics calculations",
+            questions_data=pq.psc8_questions
         )
 
     if ptask == 9:
@@ -243,5 +251,6 @@ def ptasks(ptask, phy, phy_frame, heading, paragrah):
             rule="1. Loading with wax lowers frequency (Load = Lower).\n2. Filing or scraping a prong increases frequency (File = Fast).",
             example_1="1) Tuning fork gives 4 beats/sec with 256 Hz fork. When loaded with wax, beat frequency decreases to 2. Frequency is 260 Hz.",
             example_2="2) Filing a prong increases frequency, helping resolve ambiguous beat frequency directions in acoustic problems.",
-            quick_application="Musical instrument tuning\nAcoustic calibration"
+            quick_application="Musical instrument tuning\nAcoustic calibration",
+            questions_data=pq.psc9_questions
         )

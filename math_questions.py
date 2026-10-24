@@ -71,7 +71,7 @@ def question_loader(parent,qset,qno=0):
     ans_l.grid(sticky="s",row=5,column=0,pady=50)
 
 
-def mtasks(mtask, maths, math_frame, heading, paragrah):
+def mtasks(mtask, maths, math_frame, heading, paragrah,questions_data):
     page_no = 1
     
     math_frame.grid_forget()
@@ -116,7 +116,7 @@ def mtasks(mtask, maths, math_frame, heading, paragrah):
         
         pra_q = CTkFrame(m1_pra)
         pra_q.columnconfigure(0, weight=1)
-        pra_q.grid(row=1, column=0, sticky="nsew", pady=5, padx=3.5)
+        pra_q.grid(row=1, column=0, sticky="nsew", pady=5, padx=5)
         m1_pra.grid(column=1, row=0, sticky="nswe")        
         m1_intro = CTkFrame(math_sc_1)
         m1_intro.columnconfigure(0, weight=1)
@@ -145,6 +145,7 @@ def mtasks(mtask, maths, math_frame, heading, paragrah):
         example_1="1) 48 × 5 \n48 × 10= 480\n480 ÷ 2 = 240",
         example_2="2) 79 × 5 \n79 × 10= 790\n790 ÷ 2 = 395",
         quick_application="Financial modeling (quick tip/discount calculations)\nSoftware engineering (cheap integer scaling in embedded systems)\nEveryday estimation (splitting bills, quick unit conversions)",
+        questions_data=pq.msc1_questions
     )
     if mtask ==2:
         return create_math_screen(
