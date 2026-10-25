@@ -7,8 +7,6 @@ from math_questions import mtasks, question_loader
 from phy_questions import ptasks,question_loader
 from chem_questions import ctasks,question_loader
 import os
-import sys
-import subprocess
 
 #import login1 ,login_2
 # Theme files available in the Settings dropdown.
@@ -29,33 +27,6 @@ ACTIVE_APPEARANCE = "dark"
 
 with open('credits.json','r') as f:
     credit = json.load(f)
-
-def theme_switch(choice=None):
-    """Restart VORAGO with the selected JSON theme loaded before widgets are created."""
-    theme_file = THEME_FILES.get(t_switch.get())
-    if not theme_file:
-        return
-
-    appearance = "light" if l_dswitch.get() else "dark"
-    if theme_file == ACTIVE_THEME_FILE and appearance == ACTIVE_APPEARANCE:
-        return
-
-    try:
-        subprocess.Popen(
-            [
-                sys.executable,
-                os.path.abspath(__file__),
-                theme_file,
-                appearance,
-            ],
-            cwd=BASE_DIR,
-        )
-    except OSError as error:
-        print(f"Could not restart VORAGO to apply the theme: {error}")
-        return
-
-    app_window.destroy()
-
 
 def l_d():
     if l_dswitch.get() ==1 :
@@ -404,8 +375,6 @@ if __name__ =="__main__":
         font=("Fira Sans Condensed", 20),
     )
     l_dswitch.grid(column=0,row=0,sticky="n",padx=8,pady=8)
-    if ACTIVE_APPEARANCE == "light":
-        l_dswitch.select()
     if ACTIVE_APPEARANCE == "light":
         l_dswitch.select()
     t_switch = CTkOptionMenu(
