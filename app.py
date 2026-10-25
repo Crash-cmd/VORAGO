@@ -160,20 +160,8 @@ def cshortcut_repeater(no):
         sc.grid(row=no,column=0,pady=8,padx=8)
 
 
-if __name__ =="__main__":
-    if True:#login_2.login_procces== True:
-        app_window = CTk()
-        app_window.geometry("1980x1020")
+def build_ui():
 
-        #Side Pannel-------------------------------------------
-        side_pannel =  CTkFrame(app_window)
-        side_pannel.configure(corner_radius=10)
-
-
-
-        #Images ____________________________________________________________________
-        logo_img = Image.open("images/logo.png")
-        math_d = Imdef build_ui():
     """Create or recreate VORAGO's interface with the selected theme."""
     global Arial_f, Fsc_f, Theme, accurate, ch_pass, ch_usr, chem, chem_d, chem_frame, chem_l, con_var, content, font_frame, font_l, gear_d, gear_l, home_page, icon, info_l, info_user, l_dswitch, lib_mono, logo, logo5, logo_img, logo_label, main_frame, math, math_d, math_frame, math_l, maths, pan_var, pannel_mode, pannel_normal, pannel_text, pannel_ver, password, phy, phy_d, phy_frame, phy_l, placeholder_badge, settings, side_pannel, spacer, t_switch, text_l, tit_var, title_font, user_name
 
