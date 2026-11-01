@@ -47,7 +47,7 @@ def taskbar1():
     phy.grid_forget()
     chem.grid_forget()
     settings.grid_forget()
-    home_page.grid_forget()
+    home_page.grid(row=0, column=0, sticky="nswe")
 def taskbar2():
     maths.grid(sticky = "nswe",row=0,column=0)
     phy.grid_forget()
@@ -172,88 +172,88 @@ def build_ui():
     for widget in app_window.winfo_children():
         widget.destroy()
 
-    #Side Pannel-------------------------------------------
-    side_pannel =  CTkFrame(app_window)
-    side_pannel.configure(corner_radius=10)
+    # Horizontal navigation bar -----------------------------------------------
+    top_panel = CTkFrame(app_window, corner_radius=15)
+    top_panel.grid(row=0, column=0, sticky="ew", padx=12, pady=(12, 6))
 
-
-
-    #Images ____________________________________________________________________
     logo_img = Image.open("images/logo.png")
     math_d = Image.open("images/maths_dark.png")
     math_l = Image.open("images/math_light.png")
     phy_d = Image.open("images/phy_dark.png")
     phy_l = Image.open("images/phy_light.png")
-    chem_d= Image.open("images/chem_dark.png")
+    chem_d = Image.open("images/chem_dark.png")
     chem_l = Image.open("images/chem_light.png")
-    gear_d= Image.open("images/gear_dark.png")
+    gear_d = Image.open("images/gear_dark.png")
     gear_l = Image.open("images/gear_light.png")
     accurate = Image.open("images/badge_accuracte.png")
     placeholder_badge = Image.open("images/place_holder.png")
-    #Images ____________________________________________________________________
 
-    #Taskbar ____________________________________________________________________
-    
-    #Taskbar ____________________________________________________________________
     logo = CTkLabel(
-        side_pannel,
-        image=CTkImage(logo_img, size=(50, 50)),
+        top_panel,
+        image=CTkImage(light_image=logo_img, dark_image=logo_img, size=(42, 42)),
         text=""
     )
-    logo.grid(column=0, row=0, pady=15, padx=5)
+    logo.grid(row=0, column=0, padx=(16, 28), pady=8)
 
-    icon = Image.open("images/icon.png")
+    home_button = CTkButton(
+        top_panel, text="Home", width=110, height=46,
+        font=("Fira Sans Condensed", 18),
+        command=taskbar1
+    )
+    home_button.grid(row=0, column=1, padx=8, pady=8)
 
     math = CTkButton(
-        side_pannel,
-        image=CTkImage(light_image=math_d, dark_image=math_l, size=(40, 40)),
-        width=50, height=50, text="", bg_color="transparent",
-        fg_color="transparent", command=taskbar2
+        top_panel,
+        image=CTkImage(light_image=math_d, dark_image=math_l, size=(28, 28)),
+        text="Maths", compound="left", width=125, height=46,
+        font=("Fira Sans Condensed", 18),
+        bg_color="transparent", fg_color="transparent",
+        command=taskbar2
     )
-    math.grid(column=0, row=1, pady=10)
+    math.grid(row=0, column=2, padx=8, pady=8)
 
     phy = CTkButton(
-        side_pannel,
-        image=CTkImage(light_image=phy_d, dark_image=phy_l, size=(40, 40)),
-        text="", width=50, height=50, bg_color="transparent",
-        fg_color="transparent", command=taskbar3
+        top_panel,
+        image=CTkImage(light_image=phy_d, dark_image=phy_l, size=(28, 28)),
+        text="Physics", compound="left", width=125, height=46,
+        font=("Fira Sans Condensed", 18),
+        bg_color="transparent", fg_color="transparent",
+        command=taskbar3
     )
-    phy.grid(column=0, row=2, pady=10)
+    phy.grid(row=0, column=3, padx=8, pady=8)
 
     chem = CTkButton(
-        side_pannel,
-        image=CTkImage(light_image=chem_d, dark_image=chem_l, size=(40, 40)),
-        text="", width=50, height=50, bg_color="transparent",
-        fg_color="transparent", command=taskbar4
+        top_panel,
+        image=CTkImage(light_image=chem_d, dark_image=chem_l, size=(28, 28)),
+        text="Chemistry", compound="left", width=140, height=46,
+        font=("Fira Sans Condensed", 18),
+        bg_color="transparent", fg_color="transparent",
+        command=taskbar4
     )
-    chem.grid(column=0, row=3, pady=10)
+    chem.grid(row=0, column=4, padx=8, pady=8)
 
     logo5 = CTkButton(
-        side_pannel,
-        image=CTkImage(light_image=gear_d, dark_image=gear_l, size=(40, 40)),
-        text="", width=50, height=50, bg_color="transparent",
-        fg_color="transparent", command=taskbar5
+        top_panel,
+        image=CTkImage(light_image=gear_d, dark_image=gear_l, size=(28, 28)),
+        text="Settings", compound="left", width=130, height=46,
+        font=("Fira Sans Condensed", 18),
+        bg_color="transparent", fg_color="transparent",
+        command=taskbar5
     )
-    logo5.grid(column=0, row=4, pady=10)
+    logo5.grid(row=0, column=5, padx=8, pady=8)
 
-    side_pannel.columnconfigure(0, weight=1)
-    side_pannel.rowconfigure(0, weight=1)
-    side_pannel.rowconfigure(1, weight=1)
-    side_pannel.rowconfigure(2, weight=1)
-    side_pannel.rowconfigure(3, weight=1)
-    side_pannel.rowconfigure(4, weight=1)
-    side_pannel.rowconfigure(5, weight=1)
+    top_panel.columnconfigure(6, weight=1)
 
-    
-    side_pannel.grid(row=0, column=0, sticky="ns",pady=40,padx=10)
+    # Main content now sits below the horizontal navigation bar.
+    main_frame = CTkFrame(app_window)
+    main_frame.grid(row=1, column=0, sticky="nswe", padx=12, pady=(6, 12))
 
+    app_window.columnconfigure(0, weight=1)
+    app_window.rowconfigure(0, weight=0)
+    app_window.rowconfigure(1, weight=1)
 
-    
-    # Vertical spacer
-    spacer = CTkFrame(app_window, fg_color="transparent", width=10)
-    spacer.grid(row=0, column=1, sticky="ns")
+    # ---------------------------------------------------------------------------
 
-    #-------------------------------------------------------------------------------
 
     #Main frame display ------------------------------------
     
@@ -402,16 +402,6 @@ def build_ui():
     Fsc_f = CTkRadioButton(font_frame,variable=con_var,value="Fira Sans Condensed",text="Fira Sans",font=("Fira Sans Condensed",20))
     Fsc_f.grid(column=2,row=4,pady=8,padx=8)
     font_frame.grid(column=0,row=1,sticky="ew",pady=10)
-
-    pan_var = IntVar(value=1)
-    pannel_mode = CTkFrame(settings,corner_radius=20,border_width=3)
-    pannel_text= CTkLabel(pannel_mode,text="Pannel Orientation",font=("Fira Sans Condensed",40),corner_radius=20)
-    pannel_text.grid(column=0,row=0,sticky="w",pady=8,padx=8)
-    pannel_normal = CTkRadioButton(pannel_mode,text="Horizontal(Default)",font=("Fira Sans Condensed",20),variable=pan_var,value=1)
-    pannel_normal.grid(column=0,row=1,pady=8,padx=8)
-    pannel_ver = CTkRadioButton(pannel_mode,text="Vertical Pannel",font=("Fira Sans Condensed",20),variable=pan_var,value=2)
-    pannel_ver.grid(column=1,row=1,pady=8,padx=8)
-    pannel_mode.grid(column = 0,row=2,sticky = "ew",pady=8,padx=8)
 
     tit_var = StringVar(value="Fira Sans Condensed")
     info_user = CTkFrame(settings,corner_radius=20,border_width=3)
